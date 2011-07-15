@@ -22,22 +22,20 @@ public class Trie<K,V> {
 	 * @return The longest matched sequence of keys existing in this
 	 *         trie
 	 */
-	@SuppressWarnings("unchecked")
-    public K[] getDeepestMatch(K[] keys) {
+    public List<K> getDeepestMatch(List<K> keys) {
 		TrieNode<K,V> current = this.root;
 		List<K> matched = new ArrayList<K>();
 		
-		for(int i = 0; i < keys.length; i++) {
-			current = current.getChild(keys[i]);
+		for(int i = 0; i < keys.size(); i++) {
+			current = current.getChild(keys.get(i));
 			if(current == null) {
 				break;
 			}
-			matched.add(keys[i]);
+			matched.add(keys.get(i));
 		}
 		
 		// Return last located command
-		//return matched.toArray(new K[matched.size()]);
-		return (K[]) matched.toArray();
+		return matched;
 	}
 	
 	/**
@@ -47,12 +45,12 @@ public class Trie<K,V> {
 	 * @return The object associated with the given path in the trie
 	 * @throws IndexOutOfBoundsException if no object exists for the given path
 	 */
-	public V get(K[] path) {
+	public V get(List<K> path) {
 	    TrieNode<K,V> current = this.root;
-	    for(int i = 0; i < path.length; i++) {
-	        current = current.getChild(path[i]);
+	    for(int i = 0; i < path.size(); i++) {
+	        current = current.getChild(path.get(i));
 	        if(current == null) {
-	            throw new IndexOutOfBoundsException("Key " + path[i] + " not in trie");
+	            throw new IndexOutOfBoundsException("Key " + path.get(i) + " not in trie");
 	        }
 	    }
 	    return current.getValue();
@@ -65,7 +63,7 @@ public class Trie<K,V> {
 	 * @return The value corresponding to the longest matched sequence in
 	 *         the trie
 	 */
-	public V find(K[] keys) {
+	public V find(List<K> keys) {
 	    return this.get(this.getDeepestMatch(keys));
 	}
 }
