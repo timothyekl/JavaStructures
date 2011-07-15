@@ -3,12 +3,12 @@ package com.lithium3141.javastructures.trie;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TrieNode<E> {
-	protected Map<String, TrieNode<E>> children;
-	protected E value;
+public class TrieNode<K,V> {
+	protected Map<K, TrieNode<K,V>> children;
+	protected V value;
 	
-	public TrieNode(E value) {
-		this.children = new HashMap<String, TrieNode<E>>();
+	public TrieNode(V value) {
+		this.children = new HashMap<K, TrieNode<K,V>>();
 		this.value = value;
 	}
 	
@@ -17,7 +17,7 @@ public class TrieNode<E> {
 	 * 
 	 * @return The OWCommand for this node 
 	 */
-	public E getValue() {
+	public V getValue() {
 		return this.value;
 	}
 	
@@ -26,7 +26,7 @@ public class TrieNode<E> {
 	 * 
 	 * @param value The new value
 	 */
-	public void setValue(E value) {
+	public void setValue(V value) {
 		this.value = value;
 	}
 	
@@ -36,7 +36,7 @@ public class TrieNode<E> {
 	 * @param key The key for the new child
 	 * @param child The new OWCommandTrieNode to add as a child
 	 */
-	public void setChild(String key, TrieNode<E> child) {
+	public void setChild(K key, TrieNode<K,V> child) {
 		this.children.put(key, child);
 	}
 	
@@ -47,8 +47,8 @@ public class TrieNode<E> {
 	 * @param command The new OWCommand to add as a child. Autoboxed
 	 *                in an OWCommandTrieNode before adding
 	 */
-	public void setChild(String key, E value) {
-		this.children.put(key, new TrieNode<E>(value));
+	public void setChild(K key, V value) {
+		this.children.put(key, new TrieNode<K,V>(value));
 	}
 	
 	/**
@@ -58,7 +58,7 @@ public class TrieNode<E> {
 	 * @return The matching OWCommandTrieNode for the given key, or
 	 *         null if no such key exists
 	 */
-	public TrieNode<E> getChild(String key) {
+	public TrieNode<K,V> getChild(K key) {
 		return this.children.get(key);
 	}
 }

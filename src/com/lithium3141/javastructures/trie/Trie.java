@@ -3,14 +3,14 @@ package com.lithium3141.javastructures.trie;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Trie<E> {
-	protected TrieNode<E> root;
+public class Trie<K,V> {
+	protected TrieNode<K,V> root;
 	
 	public Trie() {
-		this.root = new TrieNode<E>(null);
+		this.root = new TrieNode<K,V>(null);
 	}
 	
-	public TrieNode<E> getRoot() {
+	public TrieNode<K,V> getRoot() {
 		return this.root;
 	}
 	
@@ -22,9 +22,10 @@ public class Trie<E> {
 	 * @return The longest matched sequence of keys existing in this
 	 *         trie
 	 */
-	public String[] getDeepestMatch(String[] keys) {
-		TrieNode<E> current = this.root;
-		List<String> matched = new ArrayList<String>();
+	@SuppressWarnings("unchecked")
+    public K[] getDeepestMatch(K[] keys) {
+		TrieNode<K,V> current = this.root;
+		List<K> matched = new ArrayList<K>();
 		
 		for(int i = 0; i < keys.length; i++) {
 			current = current.getChild(keys[i]);
@@ -35,7 +36,8 @@ public class Trie<E> {
 		}
 		
 		// Return last located command
-		return matched.toArray(new String[matched.size()]);
+		//return matched.toArray(new K[matched.size()]);
+		return (K[]) matched.toArray();
 	}
 	
 	/**
@@ -45,8 +47,8 @@ public class Trie<E> {
 	 * @return The object associated with the given path in the trie
 	 * @throws IndexOutOfBoundsException if no object exists for the given path
 	 */
-	public E get(String[] path) {
-	    TrieNode<E> current = this.root;
+	public V get(K[] path) {
+	    TrieNode<K,V> current = this.root;
 	    for(int i = 0; i < path.length; i++) {
 	        current = current.getChild(path[i]);
 	        if(current == null) {
@@ -63,7 +65,7 @@ public class Trie<E> {
 	 * @return The value corresponding to the longest matched sequence in
 	 *         the trie
 	 */
-	public E find(String[] keys) {
+	public V find(K[] keys) {
 	    return this.get(this.getDeepestMatch(keys));
 	}
 }
