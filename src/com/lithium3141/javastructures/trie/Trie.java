@@ -74,7 +74,7 @@ public class Trie<K,V> {
 	 * @param keys The key path to walk
 	 * @param val The value to insert
 	 */
-	public void insert(List<K> keys, V val) {
+	public void put(List<K> keys, V val) {
 	    TrieNode<K, V> current = this.root;
 	    for(int i = 0; i < keys.size(); i++) {
 	        if(current.getChild(keys.get(i)) == null) {

@@ -75,22 +75,22 @@ public class TrieTest {
     }
     
     @Test
-    public void testInsertShort() {
+    public void testPutShort() {
         List<String> three = new ArrayList<String>() {{ add("three"); }};
         List<String> four = new ArrayList<String>() {{ add("four"); }};
         
-        this.siTrie.insert(three, 3);
-        this.siTrie.insert(four, 4);
+        this.siTrie.put(three, 3);
+        this.siTrie.put(four, 4);
         
         Assert.assertEquals(new Integer(3), this.siTrie.get(three));
         Assert.assertEquals(new Integer(4), this.siTrie.get(four));
     }
     
     @Test
-    public void testInsertLong() {
+    public void testPutLong() {
         List<String> path = new ArrayList<String>() {{ add("five"); add("six"); add("seven"); add("eight"); }};
         
-        this.siTrie.insert(path, 5678);
+        this.siTrie.put(path, 5678);
         
         Assert.assertEquals(new Integer(5678), this.siTrie.get(path));
         Assert.assertEquals(null, this.siTrie.get(new ArrayList<String>() {{ add("five"); add("six"); }}));
