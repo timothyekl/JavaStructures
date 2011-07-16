@@ -2,8 +2,8 @@ package com.lithium3141.javastructures.pair;
 
 public class Pair<E> {
     
-    private E first;
-    private E second;
+    protected E first;
+    protected E second;
 
     public Pair(E first, E second) {
         this.first = first;
