@@ -66,4 +66,22 @@ public class Trie<K,V> {
 	public V find(List<K> keys) {
 	    return this.get(this.getDeepestMatch(keys));
 	}
+	
+	/**
+	 * Insert the given value at the end of the given key path. Any empty
+	 * intermediate nodes will be assigned null values.
+	 * 
+	 * @param keys The key path to walk
+	 * @param val The value to insert
+	 */
+	public void insert(List<K> keys, V val) {
+	    TrieNode<K, V> current = this.root;
+	    for(int i = 0; i < keys.size(); i++) {
+	        if(current.getChild(keys.get(i)) == null) {
+	            current.setChild(keys.get(i), (V)null);
+	        }
+	        current = current.getChild(keys.get(i));
+	    }
+	    current.setValue(val);
+	}
 }
