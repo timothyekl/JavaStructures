@@ -96,6 +96,28 @@ public class TrieTest {
         Assert.assertEquals(null, this.siTrie.get(new ArrayList<String>() {{ add("five"); add("six"); }}));
     }
     
+    @Test
+    public void testPutRepeated() {
+        List<String> keys = new ArrayList<String>() {{ add("five"); add("six"); add("seven"); add("eight"); }};
+        
+        this.siTrie.put(keys, 8765);
+        this.siTrie.put(keys, 5678);
+        
+        Assert.assertEquals(new Integer(5678), this.siTrie.get(keys));
+    }
+    
+    @Test
+    public void testPutPartialPath() {
+        List<String> shortKeys = new ArrayList<String>() {{ add("five"); add("six"); }};
+        List<String> longKeys = new ArrayList<String>() {{ add("five"); add("six"); add("seven"); add("eight"); }};
+        
+        this.siTrie.put(longKeys, 5678);
+        this.siTrie.put(shortKeys, 56);
+        
+        Assert.assertEquals(new Integer(56), this.siTrie.get(shortKeys));
+        Assert.assertEquals(new Integer(5678), this.siTrie.get(longKeys));
+    }
+    
     @After
     public void tearDown() {
         this.siTrie = null;
