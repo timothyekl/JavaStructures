@@ -1,5 +1,6 @@
 package com.lithium3141.javastructures.test.trie;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -116,6 +117,23 @@ public class TrieTest {
         
         Assert.assertEquals(new Integer(56), this.siTrie.get(shortKeys));
         Assert.assertEquals(new Integer(5678), this.siTrie.get(longKeys));
+    }
+    
+    @Test
+    public void testValueIterator() {
+        Iterator<Integer> iter = this.siTrie.valueIterator();
+        
+        List<Integer> result = new ArrayList<Integer>();
+        
+        while(iter.hasNext()) {
+            result.add(iter.next());
+        }
+        
+        Assert.assertEquals(4, result.size());
+        Assert.assertTrue(result.contains(new Integer(1)));
+        Assert.assertTrue(result.contains(new Integer(11)));
+        Assert.assertTrue(result.contains(new Integer(12)));
+        Assert.assertTrue(result.contains(new Integer(2)));
     }
     
     @After

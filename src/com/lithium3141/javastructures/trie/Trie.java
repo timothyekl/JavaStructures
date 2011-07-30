@@ -1,6 +1,7 @@
 package com.lithium3141.javastructures.trie;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Trie<K,V> {
@@ -83,5 +84,12 @@ public class Trie<K,V> {
 	        current = current.getChild(keys.get(i));
 	    }
 	    current.setValue(val);
+	}
+	
+	/**
+	 * Get an iterator of the values currently in this Trie.
+	 */
+	public Iterator<V> valueIterator() {
+	    return new TrieValueIterator<V>(this);
 	}
 }

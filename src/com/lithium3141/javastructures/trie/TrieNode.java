@@ -1,6 +1,8 @@
 package com.lithium3141.javastructures.trie;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class TrieNode<K,V> {
@@ -60,5 +62,24 @@ public class TrieNode<K,V> {
 	 */
 	public TrieNode<K,V> getChild(K key) {
 		return this.children.get(key);
+	}
+	
+	/**
+	 * Convert the trie rooted at this node to a List of values.
+	 * 
+	 * @return a List of values contained in this node and its children.
+	 */
+	public List<V> valueList() {
+	    List<V> result = new ArrayList<V>();
+	    
+	    if(this.value != null) {
+	        result.add(this.value);
+	    }
+	    
+	    for(TrieNode<K, V> child : this.children.values()) {
+	        result.addAll(child.valueList());
+	    }
+	    
+	    return result;
 	}
 }
