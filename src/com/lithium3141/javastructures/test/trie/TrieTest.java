@@ -132,6 +132,21 @@ public class TrieTest {
     }
     
     @Test
+    public void testValuesRepeated() {
+        Trie<String, String> trie = new Trie<String, String>();
+        String val = "value";
+        
+        trie.put(new ArrayList<String>() {{ add("key1"); }}, val);
+        trie.put(new ArrayList<String>() {{ add("key2"); }}, val);
+        trie.put(new ArrayList<String>() {{ add("key3"); }}, val);
+        
+        Collection<String> result = trie.values();
+        
+        Assert.assertEquals(1, result.size());
+        Assert.assertEquals(val, result.iterator().next());
+    }
+    
+    @Test
     public void testValueIterator() {
         Iterator<Integer> iter = this.siTrie.valueIterator();
         

@@ -65,9 +65,11 @@ public class TrieNode<K,V> {
 	}
 	
 	/**
-	 * Convert the trie rooted at this node to a List of values.
+	 * Convert the trie rooted at this node to a List of values. The ordering
+	 * is not guaranteed, except that a parent node will always appear before
+	 * all its children.
 	 * 
-	 * @return a List of values contained in this node and its children.
+	 * @return a List of unique values contained in this node and its children.
 	 */
 	public List<V> valueList() {
 	    List<V> result = new ArrayList<V>();
@@ -77,7 +79,9 @@ public class TrieNode<K,V> {
 	    }
 	    
 	    for(TrieNode<K, V> child : this.children.values()) {
-	        result.addAll(child.valueList());
+	        List<V> filtered = child.valueList();
+	        filtered.removeAll(result);
+	        result.addAll(filtered);
 	    }
 	    
 	    return result;
