@@ -1,6 +1,7 @@
 package com.lithium3141.javastructures.trie;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -87,9 +88,24 @@ public class Trie<K,V> {
 	}
 	
 	/**
-	 * Get an iterator of the values currently in this Trie.
+	 * Get an iterator of the values currently in this Trie. The ordering
+	 * of values within the iterator may vary depending on the underlying
+	 * storage mechanism (currently a Map). However, the iterator can
+	 * guarantee that a node's value will appear before all its children
+	 * in the iterator.
+	 * 
+	 * @return an iterator for the values in this trie.
 	 */
 	public Iterator<V> valueIterator() {
 	    return new TrieValueIterator<V>(this);
+	}
+	
+	/**
+	 * Get a collection of the values currently stored in this Trie.
+	 * 
+	 * @return the values stored in this trie.
+	 */
+	public Collection<V> values() {
+	    return this.root.valueList();
 	}
 }
